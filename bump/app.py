@@ -3,6 +3,18 @@ from api import API
 
 app = API()
 
+def handler(req, resp):
+    resp.text = "sample"
+
+app.add_route("/sample", handler)
+
+@app.route("/template")
+def template_handler(req, resp):
+    resp.body = app.template(
+        "index.html",
+        context={"name": "Bumbo", "title": "Best Framework"}
+    ).encode()
+
 
 @app.route("/home")
 def home(request, response):
