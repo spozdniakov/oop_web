@@ -5,9 +5,10 @@ app = API()
 
 
 
-@app.route("/home")
+@app.route("/home", allowed_methods=["get"])
 def home(request, response):
     response.text = "Hello from the HOME page"
+
 
 @app.route("/about")
 def about(request, response):
