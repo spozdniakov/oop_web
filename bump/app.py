@@ -6,6 +6,12 @@ app = API()
 def handler(req, resp):
     resp.text = "sample"
 
+def custom_exception_handler(request, response, exception_cls):
+    response.text = str(exception_cls)
+
+app.add_exception_handler(custom_exception_handler)
+
+
 app.add_route("/sample", handler)
 
 @app.route("/template")
@@ -36,3 +42,7 @@ class BooksResource:
 
     def post(self, req, resp):
         resp.text = "Endpoint to create a book"
+
+@app.route("/exception")
+def exception_throwing_handler(request, response):
+    raise AssertionError("This handler should not be used.")
